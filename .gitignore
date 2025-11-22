@@ -17,3 +17,4 @@ coverage/
 
 # Vite/Next
 *.local
+server/vpm.db

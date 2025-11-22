@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import VendorListPage from "./pages/VendorListPage";
 import VendorDetailPage from "./pages/VendorDetailPage";
 import NewVendorPage from "./pages/NewVendorPage";
+import CompareVendorsPage from "./pages/CompareVendorsPage";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
             <Link to="/vendors/new" className="hover:underline">
               Add Vendor
             </Link>
+            <Link to="/compare" className="hover:underline">
+              Compare Vendors
+            </Link>
           </nav>
         </header>
 
@@ -26,6 +30,7 @@ function App() {
             <Route path="/" element={<VendorListPage />} />
             <Route path="/vendors/new" element={<NewVendorPage />} />
             <Route path="/vendors/:id" element={<VendorDetailPage />} />
+            <Route path="/compare" element={<CompareVendorsPage />} />
           </Routes>
         </main>
       </div>
