@@ -4,7 +4,7 @@ Features:
 - Dashboard with vendor list, risk filters, and risk distribution chart
 - Vendor detail with evaluations, AI score suggestions (Gemini), Executive Brief, What‑if analysis, policy check, and risk explanation
 - Compare page: AI recommendation between two vendors
-- SQLite via better-sqlite3, Express API, Vite + React client, Tailwind v4
+- JSON datastore (server/data/data.json), Express API, Vite + React client, Tailwind v4
 
 ---
 
@@ -14,14 +14,12 @@ Features:
 ```bash
 cd server
 npm install
-npm run seed      # seed demo data (optional)
+npm run seed:json # seed demo data (creates server/data/data.json)
 npm run dev       # starts on :4000
 ```
 Env vars in `server` (create `.env`):
 ```
 GEMINI_API_KEY=your_key_here
-# Optional:
-DB_PATH=./vpm.db
 # Set in prod to lock CORS to your client:
 CLIENT_ORIGIN=http://localhost:5173
 ```
@@ -43,10 +41,9 @@ npm run dev       # opens on :5173/5174
 Recommended: Render Web Service using the provided `render.yaml`.
 - Root Directory: `server`
 - Build Command: `npm install`
-- Start Command: `node index.js` (first deploy you can seed locally or run once)
+- Start Command: `node index.js` (seed once via shell: npm run seed:json)
 - Environment Variables:
   - `GEMINI_API_KEY` (required)
-  - `DB_PATH=./vpm.db` (optional)
   - `CLIENT_ORIGIN=https://<your-client-domain>` (recommended)
 Your server listens on the port Render provides (we use `process.env.PORT`).
 
@@ -93,7 +90,7 @@ AI:
 - Set `CLIENT_ORIGIN` on the server to your client URL to restrict CORS
 - Use the included simple rate limit on `/api/ai/*`
 - Do not commit `.env` files
-- For stable demo data, run `npm run seed` locally before your final build or once on your live DB, then keep `start` as `node index.js`
+- Persist data.json in production by attaching a disk to the server (mount at server/data). Seed once using `npm run seed:json` via the service shell.
 
 ---
 
